@@ -1,0 +1,57 @@
+name: Deploy FinTrack
+
+# Auto-deploy every push to `main`, plus a manual "Run workflow" button.
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ftp-deploy
+  cancel-in-progress: true
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          # ----- Required: configure these in GitHub repo →
+          # Settings → Secrets and variables → Actions → New repository secret
+          server:   ${{ secrets.FTP_HOST }}      # e.g. ftpupload.net
+          username: ${{ secrets.FTP_USER }}      # e.g. if0_NNN
+          password: ${{ secrets.FTP_PASSWORD }}
+
+          # ----- Optional: override if your host uses a different folder/port
+          port:        ${{ vars.FTP_PORT       || '21' }}
+          protocol:    ${{ vars.FTP_PROTOCOL   || 'ftp' }}   # 'ftp' | 'ftps' | 'sftp'
+          server-dir:  ${{ vars.FTP_REMOTE_DIR || '/htdocs/' }}
+          local-dir:   ./
+          dangerous-clean-slate: false
+          log-level:   minimal
+
+          # Anything that should NEVER be uploaded
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.gitignore
+            **/node_modules/**
+            **/vendor/**
+            **/uploads/**
+            !**/uploads/.htaccess
+            **/backups/**
+            !**/backups/.htaccess
+            **/*.log
+            **/*.bak
+            **/.vscode/**
+            **/.idea/**
+            **/DEPLOYMENT.md
+            **/README.md
+            **/config/database.local.php
+            **/config/database.local.example.php
+            **/database/sample_data.php

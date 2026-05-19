@@ -1,0 +1,41 @@
+# ---- Local environment overrides (must never be committed) ----
+config/database.local.php
+*.env
+.env*
+!.env.example
+
+# ---- Runtime / user data ----
+uploads/*
+!uploads/.htaccess
+backups/*
+!backups/.htaccess
+
+# ---- Optional one-shot seeder (delete on production) ----
+# Uncomment if you don't want to ship the demo data seeder:
+# database/sample_data.php
+
+# ---- Logs / misc ----
+*.log
+*.cache
+*.bak
+
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ---- Editors / IDEs ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+nbproject/
+
+# ---- Composer / Node (just in case, even though this project uses neither) ----
+/vendor/
+/node_modules/
+composer.lock
+package-lock.json
+yarn.lock

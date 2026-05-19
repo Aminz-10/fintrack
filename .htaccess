@@ -1,0 +1,23 @@
+# --- FinTrack ----------------------------------------------------
+# Basic security headers + pretty redirects.
+
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "same-origin"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Redirect bare directory access to login if not authenticated;
+    # PHP sessions handle the rest.
+    DirectoryIndex index.php
+</IfModule>
+
+# Block direct access to .env / SQL backups if ever placed in web root
+<FilesMatch "(^\.|\.(env|sql|sqlite|log|bak)$)">
+    Require all denied
+</FilesMatch>

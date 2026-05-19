@@ -1,0 +1,7 @@
+# Deny everything in this folder by default…
+Require all denied
+
+# …except the one-shot demo seeder (you can delete it after running).
+<Files "sample_data.php">
+    Require all granted
+</Files>

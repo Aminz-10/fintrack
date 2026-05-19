@@ -1,0 +1,222 @@
+/* =====================================================
+   FinTrack — Modern Theme v2 (refined)
+   Clean, accessible palette and tidy component styles.
+   ===================================================== */
+
+:root {
+    --ft-primary: #3B82F6;      /* blue-500 */
+    --ft-primary-600: #2563EB;  /* blue-600 */
+    --ft-accent: #06D6A0;       /* mint/teal */
+    --ft-success: #16A34A;
+    --ft-danger: #EF4444;
+    --ft-warning: #F59E0B;
+    --ft-muted: #6B7280;
+    --ft-surface: #FFFFFF;
+    --ft-bg: #F5F7FB;
+    --ft-radius: 12px;
+    --ft-shadow-sm: 0 6px 18px rgba(16,24,40,0.06);
+    --ft-shadow-md: 0 12px 32px rgba(16,24,40,0.08);
+    --ft-sidebar-width: 260px;
+}
+
+/* When the sidebar is open on small screens, prevent body scrolling */
+html.sidebar-open { height: 100%; overflow: hidden; }
+
+[data-bs-theme="dark"] {
+    --ft-surface: #071223;
+    --ft-bg: #05060a;
+    --ft-muted: #9AA3B2;
+    --ft-shadow-sm: 0 8px 30px rgba(0,0,0,0.6);
+    --ft-shadow-md: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+/* Typography */
+body {
+    background: var(--ft-bg);
+    color: #0b1220;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color .22s ease, color .22s ease;
+}
+
+/* ---------- Top navbar ---------- */
+.fin-navbar {
+    background: var(--ft-surface);
+    border-bottom: 1px solid rgba(15,23,42,0.04);
+    box-shadow: var(--ft-shadow-sm);
+    padding: .6rem 1rem;
+}
+[data-bs-theme="dark"] .fin-navbar { background: rgba(11,18,28,0.9); border-bottom: 1px solid rgba(255,255,255,0.04); }
+
+.navbar-brand { font-weight: 700; letter-spacing: -.01em; }
+.navbar-brand .bi { width: 44px; height: 44px; border-radius: 10px; display:inline-flex; align-items:center; justify-content:center; background: linear-gradient(135deg,var(--ft-primary),var(--ft-primary-600)); color: white; box-shadow: 0 10px 30px rgba(37,99,235,0.12); }
+
+.fin-navbar .btn { border-radius: 10px; padding: .45rem .6rem; height: 40px; }
+
+/* ---------- Shell / Sidebar ---------- */
+.fin-shell { display:flex; min-height: calc(100vh - 70px); }
+.fin-sidebar { width: var(--ft-sidebar-width); flex-shrink:0; padding: 1.25rem; display: block !important; visibility: visible !important; }
+.fin-sidebar-inner { position: sticky; top: 70px; height: calc(100vh - 70px); display:flex; flex-direction:column; gap:.6rem; }
+
+/* Ensure sidebar has its own surface and a clear stacking context */
+.fin-sidebar {
+    background: var(--ft-surface);
+    box-shadow: 0 10px 30px rgba(16,24,40,0.06);
+    transition: transform .28s ease;
+}
+
+.sidebar-brand { padding-bottom: .75rem; }
+.sidebar-brand .fin-brand-mark { width:48px; height:48px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; color:#fff; background: linear-gradient(135deg,var(--ft-primary),var(--ft-primary-600)); box-shadow: 0 10px 24px rgba(37,99,235,0.12); }
+
+.fin-sidebar .nav { display:flex; flex-direction:column; gap:.35rem; margin-top: .25rem; }
+.fin-sidebar .nav-link { display:flex; align-items:center; gap:.75rem; padding: .5rem .8rem; border-radius: 10px; color: inherit; background: transparent; border: 1px solid transparent; transition: background .12s ease, transform .12s ease, box-shadow .12s ease; }
+.fin-sidebar .nav-link i { width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; border-radius:8px; color: var(--ft-primary); background: rgba(59,130,246,0.06); }
+.fin-sidebar .nav-link:hover { background: rgba(59,130,246,0.03); transform: translateY(-2px); }
+.fin-sidebar .nav-link.active { background: linear-gradient(90deg, var(--ft-primary), var(--ft-primary-600)); color: #fff; font-weight:600; box-shadow: 0 10px 30px rgba(37,99,235,0.12); }
+.fin-sidebar .nav-link.active i { background: rgba(255,255,255,0.12); color:#fff; }
+
+/* ---------- Cards ---------- */
+.card { border: none; border-radius: calc(var(--ft-radius) + 6px); background: var(--ft-surface); box-shadow: var(--ft-shadow-sm); transition: transform .14s ease, box-shadow .14s ease; }
+.card:hover { transform: translateY(-6px); box-shadow: var(--ft-shadow-md); }
+.stat-card .stat-icon { width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background: rgba(59,130,246,0.08); color: var(--ft-primary); }
+
+/* ---------- Buttons & controls ---------- */
+.btn { border-radius: 10px; }
+.btn-primary { background: linear-gradient(90deg,var(--ft-primary),var(--ft-primary-600)); border: none; color: #fff; box-shadow: 0 10px 30px rgba(37,99,235,0.08); }
+.btn-outline-secondary { border: 1px solid rgba(15,23,42,0.06); color: var(--ft-muted); background: transparent; }
+
+.bubble { display:inline-flex; gap:.6rem; padding: .45rem .8rem; border-radius: 999px; background: rgba(255,255,255,0.9); box-shadow: 0 8px 24px rgba(10,20,40,0.04); font-weight:600; }
+
+/* ---------- Forms ---------- */
+.form-control, .form-select { border-radius: 10px; border: 1px solid rgba(15,23,42,0.06); box-shadow: none; }
+.form-control:focus, .form-select:focus { box-shadow: 0 6px 20px rgba(37,99,235,0.06); border-color: var(--ft-primary-600); }
+.input-group-text { background: transparent; border: 1px solid rgba(15,23,42,0.06); border-radius: 10px; }
+
+/* ---------- Tables ---------- */
+.table { background: transparent; }
+.table th { color: var(--ft-muted); font-weight:700; font-size: .95rem; }
+.table tbody tr:hover { background: rgba(59,130,246,0.035); }
+.table-borderless td, .table-borderless th { border: none; }
+
+/* ---------- Badges and labels ---------- */
+.badge { border-radius: 999px; font-weight:600; }
+
+/* ---------- Utilities & small tweaks ---------- */
+.fin-brand-mark { width:64px; height:64px; border-radius:14px; background: linear-gradient(135deg,var(--ft-primary),var(--ft-primary-600)); color:#fff; display:inline-flex; align-items:center; justify-content:center; box-shadow: 0 16px 40px rgba(37,99,235,0.12); }
+
+/* Small screens adjustments */
+@media (max-width: 767.98px) { .fin-sidebar { display:none; } .fin-navbar .navbar-brand span { display:none; } .fin-main { padding: .75rem; } }
+
+/* Keep dropdown menus readable in dark */
+[data-bs-theme="dark"] .dropdown-menu { background-color: #071223; border-color: rgba(255,255,255,0.03); }
+
+/* Segmented control removed — use Bootstrap button groups */
+
+/* Focus ring for accessibility */
+:focus { outline: 3px solid rgba(37,99,235,0.12); outline-offset: 2px; }
+
+
+.fin-sidebar .nav-link i {
+    font-size: 1.05rem;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8);
+    color: var(--bs-body-color);
+}
+[data-bs-theme="dark"] .fin-sidebar .nav-link i {
+    background: rgba(255,255,255,0.03);
+}
+
+.fin-sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    z-index: 1040;
+}
+
+.fin-main {
+    flex: 1;
+    min-width: 0;
+    padding: 1rem;
+}
+
+@media (max-width: 991.98px) {
+    .fin-sidebar {
+        position: fixed;
+        z-index: 1200;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        transform: translateX(-100%);
+        width: min(86%, var(--ft-sidebar-width));
+        overflow: visible;
+    }
+    .fin-sidebar.show {
+        transform: translateX(0) !important;
+        left: 0 !important;
+        right: auto !important;
+        z-index: 1400 !important;
+        visibility: visible !important;
+    }
+    .fin-sidebar-backdrop.show {
+        display: block !important;
+        z-index: 1300 !important;
+    }
+    .fin-sidebar-inner {
+        position: relative;
+        top: 0;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 1.25rem;
+    }
+}
+
+/* ---------- Cards, Controls & Utilities ---------- */
+.card { border: none; border-radius: calc(var(--ft-radius) + 6px); background: var(--ft-surface); box-shadow: var(--ft-shadow-sm); transition: transform .14s ease, box-shadow .14s ease; }
+.card:hover { transform: translateY(-6px); box-shadow: var(--ft-shadow-md); }
+.stat-card .stat-icon { width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background: rgba(59,130,246,0.08); color: var(--ft-primary); }
+
+/* Auth / center cards */
+.fin-auth-shell { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem 1rem; }
+.fin-auth-card { width:100%; max-width:480px; border-radius:18px; box-shadow:var(--ft-shadow-md); padding:1.5rem; background:var(--ft-surface); }
+
+.fin-brand-mark { width:64px; height:64px; border-radius:14px; background: linear-gradient(135deg,var(--ft-primary),var(--ft-primary-600)); color:#fff; display:inline-flex; align-items:center; justify-content:center; box-shadow: 0 16px 40px rgba(37,99,235,0.12); }
+
+.bubble { display:inline-flex; align-items:center; gap:.6rem; padding:.45rem .8rem; border-radius:999px; background: rgba(255,255,255,0.9); box-shadow: 0 8px 24px rgba(10,20,40,0.04); font-weight:600; }
+
+.btn { border-radius: 10px; }
+.btn-primary { background: linear-gradient(90deg,var(--ft-primary),var(--ft-primary-600)); border: none; color: #fff; box-shadow: 0 10px 30px rgba(37,99,235,0.08); }
+
+.form-control, .form-select { border-radius: 10px; border: 1px solid rgba(15,23,42,0.06); box-shadow: none; }
+.form-control:focus, .form-select:focus { box-shadow: 0 6px 20px rgba(37,99,235,0.06); border-color: var(--ft-primary-600); }
+
+table.table > :not(caption) > * > * { padding-top: .7rem; padding-bottom: .7rem; }
+
+.badge {
+    font-weight: 600;
+    letter-spacing: .01em;
+    border-radius: 999px;
+}
+
+/* keep dropdown menus crisp on dark mode */
+[data-bs-theme="dark"] .dropdown-menu {
+    background-color: #111215;
+    border-color: rgba(255,255,255,0.03);
+}
+
+/* Small responsiveness tweaks */
+@media (max-width: 767.98px) {
+    /* Keep sidebar off-canvas but available via toggle on small screens */
+    .fin-navbar .navbar-brand span { display: none; }
+    .fin-main { padding: .75rem; }
+}
+
+/* iOS segmented control removed — migrated to Bootstrap button groups. */
+
